@@ -21,6 +21,7 @@ export const authSlice = createSlice({
         setLogout: (state) => {
             state.user = null;
             state.token = null;
+            console.log("User Logged Out!")
         },
         setFriends: (state, action) => {
             if(state.user) {
