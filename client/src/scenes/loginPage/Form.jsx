@@ -91,7 +91,7 @@ const Form = () => {
 
     if (loggedIn && !loggedIn.message){
         dispatch(
-            
+
             setLogin({
                 user: loggedIn.user, 
                 token: loggedIn.token
@@ -107,7 +107,8 @@ const Form = () => {
 
 
   const handleFormSubmit = async (values, onSubmitProps) => {
-    if (isLogin) await login(values, onSubmitProps);
+    const {setErrors} = onSubmitProps;
+    if (isLogin) await login(values, {setErrors});
     if (isRegister) await register(values, onSubmitProps);
   };
 
