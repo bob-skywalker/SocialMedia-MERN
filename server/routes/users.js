@@ -9,7 +9,7 @@ import { verifyToken } from "../middleware/auth.js";
 const router = express.Router();
 
 /* READ */
-router.get("/:id", getUser); //ADD BACK verifyToken!
+router.get("/:id", verifyToken, getUser); //ADD BACK verifyToken!
 router.get("/:id/friends", verifyToken, getUserFriends);
 
 
