@@ -11,6 +11,8 @@ const HomePage = () => {
   const { _id, picturePath } = useSelector((state) => state.user);
   const posts = useSelector((state) => state.posts);
 
+  
+
   return (
     <>
       <Navbar />
