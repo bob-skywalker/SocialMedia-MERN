@@ -40,7 +40,6 @@ const Friend = ({ friendId, name, subtitle, userPicturePath}) => {
     return (
         <FlexBetween>
             <FlexBetween gap="1rem">
-                {console.log(friends)}
                 <UserImage image={userPicturePath} size="55px" />
                 <Box 
                     onClick={() => {
