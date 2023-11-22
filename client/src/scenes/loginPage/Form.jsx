@@ -24,7 +24,7 @@ const registerSchema = yup.object().shape({
   password: yup.string().required("required"),
   location: yup.string().required("required"),
   occupation: yup.string().required("required"),
-  picture: yup.string().required("required"),
+  image: yup.string().required("required"),
 });
 
 const loginSchema = yup.object().shape({
@@ -39,7 +39,7 @@ const initialValuesRegister = {
   password: "",
   location: "",
   occupation: "",
-  picture: "",
+  image: "",
 };
 
 const initialValuesLogin = {
@@ -61,7 +61,12 @@ const Form = () => {
     for (let value in values) {
         formData.append(value, values[value])
     }
-    formData.append("picturePath", values.picture.name);
+
+    // formData.append("picturePath", values.picture.name);
+
+    // if (values.image) {
+    //   formData.append('image', values.image);
+    // }
 
     const savedUserResponse = await fetch(
         "http://localhost:3001/auth/register",
@@ -193,7 +198,7 @@ const Form = () => {
                             acceptFiles=".jpeg,.jpg,.png"
                             multiple={false}
                             onDrop={(acceptedFiles) => 
-                                setFieldValue("picture", acceptedFiles[0])
+                                setFieldValue("image", acceptedFiles[0])
                             }
                         >
                             {({ getRootProps, getInputProps }) => (
@@ -204,11 +209,11 @@ const Form = () => {
                                     sx={{ "&:hover": { cursor: "pointer"}}}
                                 >
                                     <input {...getInputProps()} />
-                                    {!values.picture ? (
+                                    {!values.image ? (
                                         <p>Add Picture Here</p>
                                     ): (
                                         <FlexBetween>
-                                            <Typography>{values.picture.name}</Typography>
+                                            <Typography>{values.image.name}</Typography>
                                             <EditOutlinedIcon /> 
                                         </FlexBetween>
                                     )}

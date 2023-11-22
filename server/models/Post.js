@@ -20,6 +20,7 @@ const PostSchema = new mongoose.Schema({
     location: String ,
     description: String, 
     picturePath: String, 
+    audioPath: String,
     userPicturePath: String,
     likes: {
         type: Map,

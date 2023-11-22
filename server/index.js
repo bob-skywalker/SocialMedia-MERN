@@ -43,12 +43,12 @@ const cloudinaryStorage = new CloudinaryStorage({
 });
 
 
-cloudinary.uploader.upload("https://upload.wikimedia.org/wikipedia/commons/a/ae/Olympic_flag.jpg", 
-  { folder: "bobokingdom", public_id: "olympic_flag" }, 
-  function(error, result) {
-    if (error) console.error('Upload Error:', error);
-    else console.log('Upload Result:', result);
-  });
+// cloudinary.uploader.upload("https://upload.wikimedia.org/wikipedia/commons/a/ae/Olympic_flag.jpg", 
+//   { folder: "bobokingdom", public_id: "olympic_flag" }, 
+//   function(error, result) {
+//     if (error) console.error('Upload Error:', error);
+//     else console.log('Upload Result:', result);
+//   });
 
 
 /* CONFIGURATIONS */
@@ -77,12 +77,21 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({ storage });
+//Modified with Cloudinary
+// const upload = multer({ storage });
+const upload = multer({storage: cloudinaryStorage})
 
 /* ROUTES WITH FILES */
 
-app.post("/auth/register", upload.single("picture"), register);
-app.post("/posts", verifyToken, upload.single("picture"), createPost);
+app.post("/auth/register", upload.fields([
+  {name: 'image', maxCount: 1}
+]), register);
+
+//Modified with Cloudinary
+app.post("/posts", verifyToken, upload.fields([
+    {name: 'image', maxCount: 1}, 
+    {name: 'audio', maxCount: 1}
+]), createPost);
 
 /* ROUTES */
 

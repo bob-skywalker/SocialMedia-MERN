@@ -121,7 +121,7 @@ const UserWidget = ({ userId, picturePath }) => {
                     </Typography>
                     <FlexBetween gap="1rem" mb="0.5rem">
                         <FlexBetween gap="1rem">
-                            <img src="assets/twitter.png"  alt="twitter"/>
+                            <img src='https://res.cloudinary.com/dkuamfhwm/image/upload/v1700690620/bobokingdom/txtwvdqzhoj5v3qnmces.png'  alt="twitter"/>
                             <Box>
                                 <Typography color={main} fontWeight="500">
                                     Twitter
@@ -134,7 +134,7 @@ const UserWidget = ({ userId, picturePath }) => {
 
                     <FlexBetween gap="1rem" mb="0.5rem">
                         <FlexBetween gap="1rem">
-                            <img src="assets/linkedIn.png"  alt="linkedIn"/>
+                            <img src="https://res.cloudinary.com/dkuamfhwm/image/upload/v1700690634/bobokingdom/mt3lmupcfdqbtiy87cxb.png"  alt="linkedIn"/>
                             <Box>
                                 <Typography color={main} fontWeight="500">
                                     LinkedIn
