@@ -44,7 +44,7 @@ const MyPostWidget = ({ picturePath }) => {
     const formData = new FormData();
     formData.append("userId", _id);
     formData.append("description", post);
-    
+
     if (image) {
       formData.append("image", image);
       formData.append("picturePath", image.name);
@@ -57,7 +57,8 @@ const MyPostWidget = ({ picturePath }) => {
     });
     
     const posts = await response.json();
-    dispatch(setPosts({ posts }));
+    const sortedPosts = posts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    dispatch(setPosts({ posts: sortedPosts }));
     setImage(null);
     setPost("");
   };
