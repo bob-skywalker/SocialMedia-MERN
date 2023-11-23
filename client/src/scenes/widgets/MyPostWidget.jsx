@@ -33,6 +33,7 @@ const MyPostWidget = ({ picturePath }) => {
   const [isImage, setIsImage] = useState(false);
   const [isAudio, setIsAudio] = useState(false);
   const [image, setImage] = useState(null);
+  const [audio, setAudio] = useState(null);
   const [post, setPost] = useState("");
   const { palette } = useTheme();
   const { _id } = useSelector((state) => state.user);
@@ -51,6 +52,10 @@ const MyPostWidget = ({ picturePath }) => {
       formData.append("picturePath", image.name);
     }
 
+    if (audio) {
+      formData.append('audio',audio);
+    }
+
     const response = await fetch(`http://localhost:3001/posts`, {
       method: "POST",
       headers: { Authorization: `Bearer ${token}` },
@@ -61,6 +66,9 @@ const MyPostWidget = ({ picturePath }) => {
     const sortedPosts = posts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
     dispatch(setPosts({ posts: sortedPosts }));
     setImage(null);
+    setAudio(null);
+    setIsAudio(false);
+    setIsImage(false);
     setPost("");
   };
 
@@ -137,9 +145,9 @@ const MyPostWidget = ({ picturePath }) => {
           p="1rem"
         >
           <Dropzone
-            acceptFiles=".jpeg,.jpg,.png"
+            acceptFiles=".mp3,.wav"
             multiple={false}
-            onDrop={(acceptedFiles) => setImage(acceptedFiles[0])
+            onDrop={(acceptedFiles) => setAudio(acceptedFiles[0])
             }
           >
             {({ getRootProps, getInputProps }) => (
@@ -152,18 +160,21 @@ const MyPostWidget = ({ picturePath }) => {
                 sx={{ "&:hover": { cursor: "pointer" } }}
               >
                 <input {...getInputProps()} />
-                {!image ? (
+                {!audio ? (
                   <p>Add Audio Here</p>
                 ) : (
                   <FlexBetween>
-                    <Typography>{image.name}</Typography>
+                    <Typography>{audio.name}</Typography>
                     <EditOutlined />
                   </FlexBetween>
                 )}
               </Box>
-              {image && (
+              {audio && (
                 <IconButton
-                  onClick={() => setImage(null)}
+                  onClick={() => {
+                    setAudio(null);
+                    setIsAudio(false);
+                  }}
                   sx={{
                     width: "15%"
                   }}
