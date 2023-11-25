@@ -99,8 +99,12 @@ const MyPostWidget = ({ picturePath }) => {
           <Dropzone
             acceptFiles=".jpeg,.jpg,.png"
             multiple={false}
-            onDrop={(acceptedFiles) => setImage(acceptedFiles[0])
-            }
+            onDrop={(acceptedFiles) => {
+              const filteredFiles = acceptedFiles.filter(file => 
+                file.name.endsWith('.jpeg') || file.name.endsWith('.jpg') || file.name.endsWith('.png')
+              );
+              setImage(filteredFiles[0]);
+            }}
           >
             {({ getRootProps, getInputProps }) => (
               <FlexBetween>
@@ -145,10 +149,14 @@ const MyPostWidget = ({ picturePath }) => {
           p="1rem"
         >
           <Dropzone
-            acceptFiles=".mp3,.wav"
+            acceptedFiles=".mp3,.wav"
             multiple={false}
-            onDrop={(acceptedFiles) => setAudio(acceptedFiles[0])
-            }
+            onDrop={(acceptedFiles) => {
+              const filteredFiles = acceptedFiles.filter(file => 
+                file.name.endsWith('.mp3') || file.name.endsWith('.wav')
+                );
+                setAudio(filteredFiles[0]);
+            }}
           >
             {({ getRootProps, getInputProps }) => (
               <FlexBetween>
@@ -193,6 +201,7 @@ const MyPostWidget = ({ picturePath }) => {
       <FlexBetween>
         <FlexBetween gap="0.25rem" onClick={() =>{ 
             if (!isImage) setIsAudio(false);
+            setAudio(null);
             setIsImage(!isImage)
             }}>
           <ImageOutlined sx={{ color: mediumMain }}/> 
@@ -217,6 +226,7 @@ const MyPostWidget = ({ picturePath }) => {
 
             <FlexBetween gap="0.25rem" onClick={() => {
                 if (!isAudio) setIsImage(false);
+                setImage(null);
                 setIsAudio(!isAudio);
                 }}>
               <MicOutlined sx={{color: mediumMain}} />
