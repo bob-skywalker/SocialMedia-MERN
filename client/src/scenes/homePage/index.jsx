@@ -22,6 +22,7 @@ const HomePage = () => {
     <>
       <Navbar />
       <Box
+        style={{paddingTop: '90px'}}
         width="100%"
         padding="2rem 6%"
         display={isNonMobileScreen ? "flex" : "block"}

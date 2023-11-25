@@ -48,8 +48,9 @@ const Navbar = () => {
 
 
     return (
+        <div style={{ position: 'fixed', top: 0, width: "100%", zIndex: 1000}}>
         <FlexBetween padding="1rem 6%" backgroundColor={alt}>
-            <FlexBetween>
+            <FlexBetween gap="2rem">
                 <Typography
                     fontWeight="bold"
                     fontSize="clamp(1rem, 2rem, 2.25rem)"
@@ -193,6 +194,7 @@ const Navbar = () => {
             
 
         </FlexBetween>
+        </div>
     )
 }
 
