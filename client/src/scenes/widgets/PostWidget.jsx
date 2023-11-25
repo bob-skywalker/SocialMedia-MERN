@@ -12,9 +12,11 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setPost } from "state";
-import AudioPlayer from 'react-h5-audio-player';
-import 'react-h5-audio-player/lib/styles.css';
-
+import AudioPlayer from "react-h5-audio-player";
+import "react-h5-audio-player/lib/styles.css";
+import { Avatar, Button, Stack, Tooltip } from "@mui/material";
+import ThumbUpAltOutlinedIcon from "@mui/icons-material/ThumbUpAltOutlined";
+import ModeCommentOutlinedIcon from "@mui/icons-material/ModeCommentOutlined";
 
 const PostWidget = ({
   postId,
@@ -35,13 +37,9 @@ const PostWidget = ({
   const isLiked = Boolean(likes[loggedInUserId]);
   const likeCount = Object.keys(likes).length;
 
-
-  
   const { palette } = useTheme();
   const main = palette.neutral.main;
   const primary = palette.primary.main;
-  const primaryLight = palette.primary.light;
-
 
   // const neutralLight = theme.palette.neutral.light;
   // const dark = theme.palette.neutral.dark;
@@ -74,11 +72,13 @@ const PostWidget = ({
         {description}
       </Typography>
 
-      {audioPath && <AudioPlayer
-        src={audioPath}
-        onPlay={e => console.log("onPlay")}
-        style={{ marginTop: "0.75rem "}}
-      />}
+      {audioPath && (
+        <AudioPlayer
+          src={audioPath}
+          onPlay={(e) => console.log("onPlay")}
+          style={{ marginTop: "0.75rem " }}
+        />
+      )}
       {picturePath && (
         <img
           width="100%"
@@ -113,21 +113,40 @@ const PostWidget = ({
           <ShareOutlined />
         </IconButton>
       </FlexBetween>
+      
       {isComments && (
         <Box mt="0.5rem">
           {comments.map((comment, index) => (
-            <Box key={`${name}-${index}`}>
+            <Box key={`${comment.userId}-${index}`} sx={{ mt: "1rem" }}>
               <Divider />
-              <Typography sx={{ color: main, m: "0.5rem 0", pl: "1rem" }}>
-                {comment}
-              </Typography>
+              <Stack direction="row" alignItems="top" sx={{ p: "0.5rem 0rem 0.3rem 0rem" }} spacing={2}>
+                <Avatar
+                  src={comment.userPicturePath}
+                  sx={{ width: 35, height: 35, mr: 1 }}
+                />
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="subtitle2" sx={{ fontWeight: "bold" }}>
+                    {comment.firstName} {comment.lastName}
+                  </Typography> 
+                  <Typography sx={{ color: main, mt: "0.15rem" }}>
+                    {comment.text}
+                  </Typography>
+                </Box>
+                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', ml: 'auto' }}>
+                  <IconButton size="small" onClick={() => console.log('Like comment logic here')}>
+                    <ThumbUpAltOutlinedIcon fontSize="inherit" />
+                  </IconButton>
+                  <Typography variant="caption">
+                    {Object.values(comment.commentLikes).filter(Boolean).length}
+                  </Typography>
+                </Box>
+              </Stack>
             </Box>
           ))}
-        <Divider /> 
         </Box>
       )}
     </WidgetWrapper>
-  );
+  )
 };
 
 export default PostWidget;
