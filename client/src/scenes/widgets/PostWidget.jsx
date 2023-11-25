@@ -12,6 +12,9 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setPost } from "state";
+import AudioPlayer from 'react-h5-audio-player';
+import 'react-h5-audio-player/lib/styles.css';
+
 
 const PostWidget = ({
   postId,
@@ -20,6 +23,7 @@ const PostWidget = ({
   description,
   location,
   picturePath,
+  audioPath,
   userPicturePath,
   likes,
   comments,
@@ -61,6 +65,12 @@ const PostWidget = ({
       <Typography color={main} sx={{ mt: "1rem" }}>
         {description}
       </Typography>
+
+      {audioPath && <AudioPlayer
+        src={audioPath}
+        onPlay={e => console.log("onPlay")}
+        style={{ marginTop: "0.75rem "}}
+      />}
       {picturePath && (
         <img
           width="100%"
