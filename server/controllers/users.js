@@ -1,5 +1,6 @@
 import { format } from "morgan";
 import User from "../models/User.js";
+import mongoose from "mongoose";
 
 export const getUser = async(req, res) => {
     try {
