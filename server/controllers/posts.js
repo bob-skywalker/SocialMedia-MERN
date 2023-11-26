@@ -84,3 +84,34 @@ export const likePost = async(req, res) => {
         res.status(404).json({message: error.message});
     }
 }
+
+export const likeComment = async(req, res) => {
+    try {
+        // commentId
+        const { postId, commentId } = req.params;
+        const { userId } = req.body;
+
+        const post = await Post.findById(postId);
+        if (!post) {
+            return res.status(404).json({message: "Post not found!"})
+        }
+        const comment = post.comments.find(comment => comment._id.toString() === commentId);
+
+        if (!comment) {
+            return res.status(404).json({message: "Comment not found!"});
+        }
+        const isLiked = comment.commentLikes.get(userId)
+
+        if (isLiked) {
+            comment.commentLikes.delete(userId)
+        } else {
+            comment.commentLikes.set(userId, true)
+        }
+
+        await post.save();
+        res.status(200).json(post);
+
+    } catch (error) {
+        res.status(404).json({message: error.message});
+    }
+}

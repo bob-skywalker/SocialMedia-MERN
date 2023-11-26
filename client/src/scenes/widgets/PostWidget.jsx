@@ -60,6 +60,22 @@ const PostWidget = ({
     dispatch(setPost({ post: updatedPost }));
   };
 
+  const patchCommentLike = async (commentId) => {
+    const response = await fetch(
+      `http://localhost:3001/posts/${postId}/${commentId}/like`,
+      {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userId: loggedInUserId }),
+      }
+    );
+    const updatedPost = await response.json();
+    dispatch(setPost({ post: updatedPost }));
+  };
+
   return (
     <WidgetWrapper m="2rem 0">
       <Friend
@@ -113,40 +129,67 @@ const PostWidget = ({
           <ShareOutlined />
         </IconButton>
       </FlexBetween>
-      
+
       {isComments && (
         <Box mt="0.5rem">
-          {comments.map((comment, index) => (
-            <Box key={`${comment.userId}-${index}`} sx={{ mt: "1rem" }}>
-              <Divider />
-              <Stack direction="row" alignItems="top" sx={{ p: "0.5rem 0rem 0.3rem 0rem" }} spacing={2}>
-                <Avatar
-                  src={comment.userPicturePath}
-                  sx={{ width: 35, height: 35, mr: 1 }}
-                />
-                <Box sx={{ flex: 1 }}>
-                  <Typography variant="subtitle2" sx={{ fontWeight: "bold" }}>
-                    {comment.firstName} {comment.lastName}
-                  </Typography> 
-                  <Typography sx={{ color: main, mt: "0.15rem" }}>
-                    {comment.text}
-                  </Typography>
-                </Box>
-                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', ml: 'auto' }}>
-                  <IconButton size="small" onClick={() => console.log('Like comment logic here')}>
-                    <ThumbUpAltOutlinedIcon fontSize="inherit" />
-                  </IconButton>
-                  <Typography variant="caption">
-                    {Object.values(comment.commentLikes).filter(Boolean).length}
-                  </Typography>
-                </Box>
-              </Stack>
-            </Box>
-          ))}
+          {comments.map((comment, index) => {
+
+            const isLikedComment = Boolean(
+              comment.commentLikes[loggedInUserId]
+            );
+
+            return (
+              <Box key={`${comment.userId}-${index}`} sx={{ mt: "1rem" }}>
+                <Divider />
+                <Stack
+                  direction="row"
+                  alignItems="top"
+                  sx={{ p: "0.5rem 0rem 0.15rem 0rem" }}
+                  spacing={2}
+                >
+                  <Avatar
+                    src={comment.userPicturePath}
+                    sx={{ width: 35, height: 35, mr: 1 }}
+                  />
+                  <Box sx={{ flexGrow: 1 }}>
+                    <Typography variant="subtitle2" sx={{ fontWeight: "bold" }}>
+                      {comment.firstName} {comment.lastName}
+                    </Typography>
+                    <Typography sx={{ color: main, mt: "0.05rem" }}>
+                      {comment.text}
+                    </Typography>
+                  </Box>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      ml: "auto",
+                    }}
+                  >
+                    <IconButton
+                      size="small"
+                      onClick={() => patchCommentLike(comment._id)}
+                    >
+                      {isLikedComment ? (
+                      <ThumbUpAltOutlinedIcon fontSize="inherit" sx={{ color: primary }} />) : 
+                      <ThumbUpAltOutlinedIcon fontSize="inherit" /> }
+                    </IconButton>
+                    <Typography variant="caption">
+                      {
+                        Object.values(comment.commentLikes).filter(Boolean)
+                          .length
+                      }
+                    </Typography>
+                  </Box>
+                </Stack>
+              </Box>
+            );
+          })}
         </Box>
       )}
     </WidgetWrapper>
-  )
+  );
 };
 
 export default PostWidget;
