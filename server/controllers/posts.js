@@ -91,21 +91,29 @@ export const likeComment = async(req, res) => {
         const { postId, commentId } = req.params;
         const { userId } = req.body;
 
+        //Fetch Post
         const post = await Post.findById(postId);
         if (!post) {
             return res.status(404).json({message: "Post not found!"})
         }
+
+        //Fetch the User 
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({message: "User not found!"});
+        }
+
+        //Fetch the Comment
         const comment = post.comments.find(comment => comment._id.toString() === commentId);
 
         if (!comment) {
             return res.status(404).json({message: "Comment not found!"});
         }
-        const isLiked = comment.commentLikes.get(userId)
-
-        if (isLiked) {
+        const commentLike = comment.commentLikes.get(userId);
+        if (commentLike && commentLike.liked) {
             comment.commentLikes.delete(userId)
         } else {
-            comment.commentLikes.set(userId, true)
+            comment.commentLikes.set(userId, { liked: true, firstName: user.firstName, lastName: user.lastName})
         }
 
         await post.save();

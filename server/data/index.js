@@ -183,8 +183,8 @@ export const posts = [
         lastName: users[2].lastName,
         userPicturePath: users[2].picturePath,
         commentLikes: new Map([
-          [userIds[1], true],
-          [userIds[3], true]
+          [userIds[1], { liked: true, firstName: users[2].firstName, lastName: users[2].lastName}],
+          [userIds[3], { liked: true, firstName: users[3].firstName, lastName: users[3].lastName}]
 
         ])
       },
@@ -195,8 +195,8 @@ export const posts = [
         lastName: users[3].lastName,
         userPicturePath: users[3].picturePath,
         commentLikes: new Map([
-          [userIds[1], true],
-          [userIds[3], true]
+          [userIds[1], { liked: true, firstName: users[1].firstName, lastName: users[1].lastName}],
+          [userIds[3], { liked: true, firstName: users[3].firstName, lastName: users[3].lastName}]
 
         ])
       }
@@ -227,8 +227,8 @@ export const posts = [
         lastName: users[0].lastName,
         userPicturePath: users[0].picturePath,
         commentLikes: new Map([
-          [userIds[1], true],
-          [userIds[3], true]
+          [userIds[1], { liked: true, firstName: users[1].firstName, lastName: users[1].lastName}],
+          [userIds[3], { liked: true, firstName: users[3].firstName, lastName: users[3].lastName}]
 
         ])
       },
@@ -239,8 +239,8 @@ export const posts = [
         lastName: users[4].lastName,
         userPicturePath: users[4].picturePath,
         commentLikes: new Map([
-          [userIds[1], true],
-          [userIds[3], true]
+          [userIds[1], { liked: true, firstName: users[1].firstName, lastName: users[1].lastName}],
+          [userIds[3], { liked: true, firstName: users[3].firstName, lastName: users[3].lastName}]
 
         ])
       }
@@ -270,8 +270,8 @@ export const posts = [
         lastName: users[1].lastName,
         userPicturePath: users[1].picturePath,
         commentLikes: new Map([
-          [userIds[1], true],
-          [userIds[3], true]
+          [userIds[1], { liked: true, firstName: users[1].firstName, lastName: users[1].lastName}],
+          [userIds[3], { liked: true, firstName: users[3].firstName, lastName: users[3].lastName}]
 
         ])
       },
@@ -282,8 +282,8 @@ export const posts = [
         lastName: users[5].lastName,
         userPicturePath: users[5].picturePath,
         commentLikes: new Map([
-          [userIds[1], true],
-          [userIds[3], true]
+          [userIds[1], { liked: true, firstName: users[1].firstName, lastName: users[1].lastName}],
+          [userIds[3], { liked: true, firstName: users[3].firstName, lastName: users[3].lastName}]
 
         ])
       },
@@ -294,8 +294,8 @@ export const posts = [
         lastName: users[7].lastName,
         userPicturePath: users[7].picturePath,
         commentLikes: new Map([
-          [userIds[1], true],
-          [userIds[3], true]
+          [userIds[1], { liked: true, firstName: users[1].firstName, lastName: users[1].lastName}],
+          [userIds[3], { liked: true, firstName: users[3].firstName, lastName: users[3].lastName}]
 
         ])
       }
@@ -324,8 +324,8 @@ export const posts = [
         lastName: users[6].lastName,
         userPicturePath: users[6].picturePath,
         commentLikes: new Map([
-          [userIds[1], true],
-          [userIds[3], true]
+          [userIds[1], { liked: true, firstName: users[1].firstName, lastName: users[1].lastName}],
+          [userIds[3], { liked: true, firstName: users[3].firstName, lastName: users[3].lastName}]
 
         ])
       },
@@ -336,8 +336,8 @@ export const posts = [
         lastName: users[2].lastName,
         userPicturePath: users[2].picturePath,
         commentLikes: new Map([
-          [userIds[1], true],
-          [userIds[3], true]
+          [userIds[1], { liked: true, firstName: users[1].firstName, lastName: users[1].lastName}],
+          [userIds[3], { liked: true, firstName: users[3].firstName, lastName: users[3].lastName}]
 
         ])
       },
@@ -348,8 +348,8 @@ export const posts = [
         lastName: users[0].lastName,
         userPicturePath: users[0].picturePath,
         commentLikes: new Map([
-          [userIds[1], true],
-          [userIds[3], true]
+          [userIds[1], { liked: true, firstName: users[1].firstName, lastName: users[1].lastName}],
+          [userIds[3], { liked: true, firstName: users[3].firstName, lastName: users[3].lastName}]
 
         ])
       }
@@ -379,8 +379,8 @@ export const posts = [
         lastName: users[1].lastName,
         userPicturePath: users[1].picturePath,
         commentLikes: new Map([
-          [userIds[1], true],
-          [userIds[3], true]
+          [userIds[1], { liked: true, firstName: users[1].firstName, lastName: users[1].lastName}],
+          [userIds[3], { liked: true, firstName: users[3].firstName, lastName: users[3].lastName}]
 
         ])
       },
@@ -391,8 +391,8 @@ export const posts = [
         lastName: users[3].lastName,
         userPicturePath: users[3].picturePath,
         commentLikes: new Map([
-          [userIds[1], true],
-          [userIds[3], true]
+          [userIds[1], { liked: true, firstName: users[1].firstName, lastName: users[1].lastName}],
+          [userIds[3], { liked: true, firstName: users[3].firstName, lastName: users[3].lastName}]
         ])
       }
     ],
@@ -420,8 +420,8 @@ export const posts = [
         lastName: users[4].lastName,
         userPicturePath: users[4].picturePath,
         commentLikes: new Map([
-          [userIds[1], true],
-          [userIds[3], true]
+          [userIds[1], { liked: true, firstName: users[1].firstName, lastName: users[1].lastName}],
+          [userIds[3], { liked: true, firstName: users[3].firstName, lastName: users[3].lastName}]
         ])
       },
       {
@@ -431,8 +431,8 @@ export const posts = [
         lastName: users[5].lastName,
         userPicturePath: users[5].picturePath,
         commentLikes: new Map([
-          [userIds[1], true],
-          [userIds[3], true]
+          [userIds[1], { liked: true, firstName: users[1].firstName, lastName: users[1].lastName}],
+          [userIds[3], { liked: true, firstName: users[3].firstName, lastName: users[3].lastName}]
         ])
       }
     ],

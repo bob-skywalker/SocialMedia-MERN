@@ -1,5 +1,24 @@
 import mongoose from "mongoose";
 
+const CommentLikeSchema = new mongoose.Schema({
+    liked: {
+        type: Boolean,
+        required: true 
+    },
+    firstName: {
+        type: String,
+        required: true,
+        min: 2,
+        max: 50
+    },
+    lastName: {
+        type: String,
+        required: true,
+        min: 2, 
+        max: 50 
+    }
+})
+
 const CommentSchema = new mongoose.Schema({
     text: {
         type: String,
@@ -24,7 +43,7 @@ const CommentSchema = new mongoose.Schema({
     userPicturePath: String,
     commentLikes: {
         type: Map, 
-        of: Boolean
+        of: CommentLikeSchema
     }
 }, {timestamps: true});
 
