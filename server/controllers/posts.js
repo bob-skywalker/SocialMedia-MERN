@@ -131,3 +131,55 @@ export const likeComment = async(req, res) => {
         res.status(404).json({message: error.message});
     }
 }
+
+export const createComment = async (req, res) => {
+    try {
+        const {postId} = req.params;
+        const {userId, text, firstName, lastName, userPicturePath} = req.body;
+
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({message: "User not found!"})
+        }
+
+        const newComment = {
+            userId,
+            text, 
+            firstName,
+            lastName,
+            userPicturePath,
+            commentLikes: {}
+        };
+
+        const updatedPost = await Post.findByIdAndUpdate(
+            postId, 
+            { $push: { comments: newComment } }, // Use $push operator
+            { new: true, runValidators: true } // Option to return updated document and run schema validators
+        );
+
+        res.status(200).json(updatedPost);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({message: error.message});
+    }
+}
+
+export const deleteComment = async(req, res) => {
+    try {
+        const {postId, commentId} = req.params;
+        const updatedPost = await Post.findByIdAndUpdate(
+            postId,
+            {$pull: {comments: {_id: commentId}}},
+            {new : true}
+        );
+
+        if (!updatedPost) {
+            return res.status(404).json({message: "Post not found"})
+        }
+        
+        res.status(200).json(updatedPost)
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({message: error.message})
+    }
+}

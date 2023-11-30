@@ -1,10 +1,11 @@
 import {
   ChatBubbleOutlineOutlined,
+  DeleteForeverOutlined,
   FavoriteBorderOutlined,
   FavoriteOutlined,
   ShareOutlined,
 } from "@mui/icons-material";
-import { Box, Divider, Grow, IconButton, Typography, useTheme } from "@mui/material";
+import { Box, Divider, Fade, Grow, IconButton, TextField, Typography, useTheme } from "@mui/material";
 import FlexBetween from "components/FlexBetween";
 import Friend from "components/Friend";
 import WidgetWrapper from "components/WidgetWrapper";
@@ -36,10 +37,13 @@ const PostWidget = ({
   const loggedInUserId = useSelector((state) => state.user._id);
   const isLiked = Boolean(likes[loggedInUserId]);
   const likeCount = Object.keys(likes).length;
+  const user = useSelector((state) => state.user)
+
 
   const { palette } = useTheme();
   const main = palette.neutral.main;
   const primary = palette.primary.main;
+  const textColor = palette.primary.light;
 
   //Hover Effects to show names
   const names = Object.values(likes).map((like) => `${like.firstName}`);
@@ -57,14 +61,45 @@ const PostWidget = ({
 
   const tooltipTitle = names.length === 0 ? '' : names.length <= 4 ? names.join(', ') + ' liked this' : `${names.slice(0, 3).join(', ')} and ${names.length - 3} others liked this` 
 
-  const QuickTransition = (props) => {
-    return <Grow {...props} timeout={0} />;
+  const QuickFade = (props) => {
+    return <Fade {...props} timeout={0} />
+  }
+  
+  //Adding comment to the Post
+  const [commentText, setCommentText] = useState('');
+  const handleCommentChange = (e) => {
+    setCommentText(e.target.value);
   };
-  // const neutralLight = theme.palette.neutral.light;
-  // const dark = theme.palette.neutral.dark;
-  // const background = theme.palette.background.default;
-  // const primaryLight = theme.palette.primary.light;
-  // const alt = theme.palette.background.alt;
+
+  const submitComment = async () => {
+
+    const commentData = {
+      userId: loggedInUserId,
+      text: commentText,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      userPicturePath: user.picturePath,
+    }
+
+
+    const response = await fetch(`http://localhost:3001/posts/${postId}/createComment`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(commentData)
+    });
+
+    if (response.ok) {
+      const updatedPost = await response.json();
+      dispatch(setPost({post: updatedPost}));
+      setCommentText('')
+    } else {
+      console.log("Failed to submit Comment")
+    }
+  }
+
 
   const patchLike = async () => {
     const response = await fetch(`http://localhost:3001/posts/${postId}/like`, {
@@ -94,6 +129,17 @@ const PostWidget = ({
     const updatedPost = await response.json();
     dispatch(setPost({ post: updatedPost }));
   };
+
+  const deleteComment = async (commentId) => {
+    const response = await fetch(`http://localhost:3001/posts/${postId}/${commentId}/deleteComment`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    const updatedPost = await response.json();
+    dispatch(setPost({post: updatedPost}));
+  }
 
   useEffect(() => {
     if (names.length === 0 && tooltipOpen) {
@@ -138,7 +184,7 @@ const PostWidget = ({
               onOpen={handleHover}
               onClose={handleLeave}
               arrow
-              TransitionComponent={QuickTransition}
+              TransitionComponent={QuickFade}
               PopperProps={{
                 placement: 'bottom'
               }}
@@ -168,11 +214,15 @@ const PostWidget = ({
       </FlexBetween>
 
       {isComments && (
+        <>
         <Box mt="0.5rem">
           {comments.map((comment, index) => {
             const isLikedComment = Boolean(
               comment.commentLikes[loggedInUserId]
             );
+            const isCurrentUser = Boolean(
+              comment.userId === loggedInUserId
+            )
 
             return (
               <Box key={`${comment.userId}-${index}`} sx={{ mt: "1rem" }}>
@@ -194,6 +244,25 @@ const PostWidget = ({
                     <Typography sx={{ color: main, mt: "0.05rem" }}>
                       {comment.text}
                     </Typography>
+                  </Box>
+
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      ml: "auto",
+                    }}
+                  >
+                    <IconButton
+                      size="small"
+                      onClick={() => deleteComment(comment._id)}
+                    >
+                      {isCurrentUser && (
+                      <DeleteForeverOutlined fontSize="inherit"/>
+                      )}
+                    </IconButton>
+
                   </Box>
                   <Box
                     sx={{
@@ -228,6 +297,30 @@ const PostWidget = ({
             );
           })}
         </Box>
+        <Box mt="1rem">
+          <form onSubmit={(e) => {
+            e.preventDefault();
+            submitComment();
+          }}>
+            <Stack direction="row" spacing={2}>
+              <TextField 
+                fullWidth
+                variant="outlined"
+                placeholder="Add a comment..."
+                value={commentText}
+                onChange={handleCommentChange}
+              />
+              <Button
+                type="submit"
+                variant="contained"
+                sx={{ color: textColor }}
+              >
+                Post
+              </Button>
+            </Stack>
+          </form>
+        </Box>
+        </>
       )}
     </WidgetWrapper>
   );

@@ -41,6 +41,7 @@ const MyPostWidget = ({ picturePath }) => {
   const isNonMobileScreen = useMediaQuery("(min-width: 1000px)");
   const mediumMain = palette.neutral.mediumMain;
   const medium = palette.neutral.medium;
+  const textColor = palette.primary.light;
 
   const handlePost = async () => {
     const formData = new FormData();
@@ -243,8 +244,8 @@ const MyPostWidget = ({ picturePath }) => {
             disabled={!post}
             onClick={handlePost}
             sx={{
-              color: palette.background.alt,
               backgroundColor: palette.primary.main,
+              color: textColor,
               borderRadius: "3rem"
             }}
             >
