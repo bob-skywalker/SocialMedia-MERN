@@ -47,6 +47,26 @@ const CommentSchema = new mongoose.Schema({
     }
 }, {timestamps: true});
 
+const PostLikeSchema = new mongoose.Schema({
+    liked: {
+        type: Boolean,
+        required: true 
+    },
+    firstName: {
+        type: String, 
+        required: true, 
+        min: 2, 
+        max: 50 
+    },
+    lastName: {
+        type: String,
+        required: true,
+        min: 2, 
+        max: 50 
+    }
+})
+
+
 const PostSchema = new mongoose.Schema({
     userId: {
         type: String, 
@@ -71,7 +91,7 @@ const PostSchema = new mongoose.Schema({
     userPicturePath: String,
     likes: {
         type: Map,
-        of: Boolean
+        of: PostLikeSchema
     },
     comments: [CommentSchema]
 }, { timestamps: true });

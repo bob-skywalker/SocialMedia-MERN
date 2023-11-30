@@ -170,10 +170,10 @@ export const posts = [
     picturePath: "https://res.cloudinary.com/dkuamfhwm/image/upload/v1700690618/bobokingdom/jmqxexststo7t1eu3jpf.jpg",
     userPicturePath: "https://res.cloudinary.com/dkuamfhwm/image/upload/v1700690598/bobokingdom/t0qgoimpbdbw0umg1wl9.jpg",
     likes: new Map([
-      [userIds[0], true],
-      [userIds[2], true],
-      [userIds[3], true],
-      [userIds[4], true],
+      [userIds[0], { liked: true, firstName: users[0].firstName, lastName: users[0].lastName }],
+      [userIds[2], { liked: true, firstName: users[2].firstName, lastName: users[2].lastName }],
+      [userIds[3], { liked: true, firstName: users[3].firstName, lastName: users[3].lastName }],
+      [userIds[4], { liked: true, firstName: users[4].firstName, lastName: users[4].lastName }],
     ]),
     comments: [
       {
@@ -214,10 +214,10 @@ export const posts = [
     picturePath: "https://res.cloudinary.com/dkuamfhwm/image/upload/v1700690618/bobokingdom/w65idnajvm06begyxyja.jpg",
     userPicturePath: "https://res.cloudinary.com/dkuamfhwm/image/upload/v1700690599/bobokingdom/xisabvyydnrfvuiap4jd.jpg",
     likes: new Map([
-      [userIds[7], true],
-      [userIds[4], true],
-      [userIds[1], true],
-      [userIds[2], true],
+      [userIds[7], { liked: true, firstName: users[7].firstName, lastName: users[7].lastName }],
+      [userIds[4], { liked: true, firstName: users[4].firstName, lastName: users[4].lastName }],
+      [userIds[1], { liked: true, firstName: users[1].firstName, lastName: users[1].lastName }],
+      [userIds[2], { liked: true, firstName: users[2].firstName, lastName: users[2].lastName }],
     ]),
     comments: [
       {
@@ -257,10 +257,10 @@ export const posts = [
     picturePath: "https://res.cloudinary.com/dkuamfhwm/image/upload/v1700690618/bobokingdom/e7ibbkbavyqwmsydafk9.jpg",
     userPicturePath: "https://res.cloudinary.com/dkuamfhwm/image/upload/v1700690598/bobokingdom/ney8sx91tqkmtwuqgysi.jpg",
     likes: new Map([
-      [userIds[1], true],
-      [userIds[6], true],
-      [userIds[3], true],
-      [userIds[5], true],
+      [userIds[1], { liked: true, firstName: users[1].firstName, lastName: users[1].lastName }],
+      [userIds[6], { liked: true, firstName: users[6].firstName, lastName: users[6].lastName }],
+      [userIds[3], { liked: true, firstName: users[3].firstName, lastName: users[3].lastName }],
+      [userIds[5], { liked: true, firstName: users[5].firstName, lastName: users[5].lastName }],
     ]),
     comments: [
       {
@@ -312,9 +312,9 @@ export const posts = [
     picturePath: "https://res.cloudinary.com/dkuamfhwm/image/upload/v1700690619/bobokingdom/sqojzkaqere7ckxsenib.jpg",
     userPicturePath: "https://res.cloudinary.com/dkuamfhwm/image/upload/v1700690599/bobokingdom/vdvgz6mehihzmp59tvct.jpg",
     likes: new Map([
-      [userIds[1], true],
-      [userIds[6], true],
-      [userIds[3], true],
+      [userIds[1], { liked: true, firstName: users[1].firstName, lastName: users[1].lastName }],
+      [userIds[6], { liked: true, firstName: users[6].firstName, lastName: users[6].lastName }],
+      [userIds[3], { liked: true, firstName: users[3].firstName, lastName: users[3].lastName }],
     ]),
     comments: [
       {
@@ -366,10 +366,10 @@ export const posts = [
     picturePath: "https://res.cloudinary.com/dkuamfhwm/image/upload/v1700690620/bobokingdom/pu1vs49z3lmsvlfm6phz.jpg",
     userPicturePath: "https://res.cloudinary.com/dkuamfhwm/image/upload/v1700690599/bobokingdom/bvq7aibpigbmamcnsymy.jpg",
     likes: new Map([
-      [userIds[1], true],
-      [userIds[3], true],
-      [userIds[5], true],
-      [userIds[7], true],
+      [userIds[1], { liked: true, firstName: users[1].firstName, lastName: users[1].lastName }],
+      [userIds[3], { liked: true, firstName: users[3].firstName, lastName: users[3].lastName }],
+      [userIds[5], { liked: true, firstName: users[5].firstName, lastName: users[5].lastName }],
+      [userIds[7], { liked: true, firstName: users[7].firstName, lastName: users[7].lastName }],
     ]),
     comments: [
       {
@@ -408,8 +408,8 @@ export const posts = [
     picturePath: "https://res.cloudinary.com/dkuamfhwm/image/upload/v1700690619/bobokingdom/tyoplf62zk5vetzqupxk.jpg",
     userPicturePath: "https://res.cloudinary.com/dkuamfhwm/image/upload/v1700690600/bobokingdom/eq3k9cqq2ghttixswblq.jpg",
     likes: new Map([
-      [userIds[1], true],
-      [userIds[2], true],
+      [userIds[1], { liked: true, firstName: users[1].firstName, lastName: users[1].lastName }],
+      [userIds[2], { liked: true, firstName: users[2].firstName, lastName: users[2].lastName }],
     ]),
 
     comments: [

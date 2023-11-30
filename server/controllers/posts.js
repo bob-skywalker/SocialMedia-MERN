@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import Post from "../models/Post.js";
 import User from "../models/User.js";
 
@@ -66,10 +67,17 @@ export const likePost = async(req, res) => {
         const post = await Post.findById(id);
         const isLiked = post.likes.get(userId);
 
+        //Find the User; 
+        const user = await User.findById(userId);
+
+        if(!user){
+            return res.status(404).json("Cannot find user!");
+        }
+
         if (isLiked) {
             post.likes.delete(userId);
         } else {
-            post.likes.set(userId, true);
+            post.likes.set(userId, {liked: true, firstName: user.firstName, lastName: user.lastName});
         }
 
         const updatedPost = await Post.findByIdAndUpdate(

@@ -4,7 +4,7 @@ import {
   FavoriteOutlined,
   ShareOutlined,
 } from "@mui/icons-material";
-import { Box, Divider, IconButton, Typography, useTheme } from "@mui/material";
+import { Box, Divider, Grow, IconButton, Typography, useTheme } from "@mui/material";
 import FlexBetween from "components/FlexBetween";
 import Friend from "components/Friend";
 import WidgetWrapper from "components/WidgetWrapper";
@@ -41,12 +41,30 @@ const PostWidget = ({
   const main = palette.neutral.main;
   const primary = palette.primary.main;
 
+  //Hover Effects to show names
+  const names = Object.values(likes).map((like) => `${like.firstName}`);
+  const [tooltipOpen, setTooltipOpen] = useState(false);
+
+  const handleHover = () => {
+    if (names.length > 0) {
+      setTooltipOpen(true);
+    }
+  };
+
+  const handleLeave = () => {
+    setTooltipOpen(false);
+  };
+
+  const tooltipTitle = names.length === 0 ? '' : names.length <= 4 ? names.join(', ') + ' liked this' : `${names.slice(0, 3).join(', ')} and ${names.length - 3} others liked this` 
+
+  const QuickTransition = (props) => {
+    return <Grow {...props} timeout={0} />;
+  };
   // const neutralLight = theme.palette.neutral.light;
   // const dark = theme.palette.neutral.dark;
   // const background = theme.palette.background.default;
   // const primaryLight = theme.palette.primary.light;
   // const alt = theme.palette.background.alt;
-
 
   const patchLike = async () => {
     const response = await fetch(`http://localhost:3001/posts/${postId}/like`, {
@@ -77,7 +95,11 @@ const PostWidget = ({
     dispatch(setPost({ post: updatedPost }));
   };
 
-
+  useEffect(() => {
+    if (names.length === 0 && tooltipOpen) {
+      setTooltipOpen(false)
+    }
+  }, [names.length, tooltipOpen])
 
   return (
     <WidgetWrapper m="2rem 0">
@@ -110,13 +132,25 @@ const PostWidget = ({
       <FlexBetween mt="0.25rem">
         <FlexBetween gap="1rem">
           <FlexBetween gap="0.3rem">
-            <IconButton onClick={patchLike}>
-              {isLiked ? (
-                <FavoriteOutlined sx={{ color: primary }} />
-              ) : (
-                <FavoriteBorderOutlined />
-              )}
-            </IconButton>
+            <Tooltip
+              title={tooltipTitle}
+              open={tooltipOpen}
+              onOpen={handleHover}
+              onClose={handleLeave}
+              arrow
+              TransitionComponent={QuickTransition}
+              PopperProps={{
+                placement: 'bottom'
+              }}
+            >
+              <IconButton onClick={patchLike}>
+                {isLiked ? (
+                  <FavoriteOutlined sx={{ color: primary }} />
+                ) : (
+                  <FavoriteBorderOutlined />
+                )}
+              </IconButton>
+            </Tooltip>
             <Typography>{likeCount}</Typography>
           </FlexBetween>
 
@@ -136,7 +170,6 @@ const PostWidget = ({
       {isComments && (
         <Box mt="0.5rem">
           {comments.map((comment, index) => {
-
             const isLikedComment = Boolean(
               comment.commentLikes[loggedInUserId]
             );
@@ -175,8 +208,13 @@ const PostWidget = ({
                       onClick={() => patchCommentLike(comment._id)}
                     >
                       {isLikedComment ? (
-                      <ThumbUpAltOutlinedIcon fontSize="inherit" sx={{ color: primary }} />) : 
-                      <ThumbUpAltOutlinedIcon fontSize="inherit" /> }
+                        <ThumbUpAltOutlinedIcon
+                          fontSize="inherit"
+                          sx={{ color: primary }}
+                        />
+                      ) : (
+                        <ThumbUpAltOutlinedIcon fontSize="inherit" />
+                      )}
                     </IconButton>
                     <Typography variant="caption">
                       {

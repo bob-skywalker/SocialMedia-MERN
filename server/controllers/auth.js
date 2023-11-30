@@ -14,7 +14,7 @@ export const register = async (req, res) => {
             location,
             occupation
         } = req.body;
-
+        
         const imagePath = req.files['image'] ? req.files['image'][0].path : null;
 
         const salt = await bcrypt.genSalt();
