@@ -50,7 +50,7 @@ const PostWidget = ({
   const [tooltipOpen, setTooltipOpen] = useState(false);
 
   const handleHover = () => {
-    if (names.length > 0) {
+    if (names.length > 1) {
       setTooltipOpen(true);
     }
   };
@@ -141,11 +141,11 @@ const PostWidget = ({
     dispatch(setPost({post: updatedPost}));
   }
 
-  useEffect(() => {
-    if (names.length === 0 && tooltipOpen) {
-      setTooltipOpen(false)
-    }
-  }, [names.length, tooltipOpen])
+  // useEffect(() => {
+  //   if (names.length === 0 && tooltipOpen) {
+  //     setTooltipOpen(false)
+  //   }
+  // }, [names.length, tooltipOpen])
 
   return (
     <WidgetWrapper m="2rem 0">
