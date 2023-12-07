@@ -179,7 +179,21 @@ export const deleteComment = async(req, res) => {
         
         res.status(200).json(updatedPost)
     } catch (error) {
-        console.log(error);
+        res.status(500).json({message: error.message})
+    }
+}
+
+export const deletePost = async(req, res) => {
+    try {
+        const { postId } = req.params;
+        
+        await Post.findByIdAndDelete(postId);
+
+        const updatedPosts = await Post.find();
+
+        res.status(200).json(updatedPosts);
+
+    } catch (error) {
         res.status(500).json({message: error.message})
     }
 }
