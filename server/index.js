@@ -16,6 +16,8 @@ import { createPost } from "./controllers/posts.js";
 import postRoutes from "./routes/posts.js";
 import { v2 as cloudinary } from 'cloudinary';
 import { CloudinaryStorage } from 'multer-storage-cloudinary';
+import Message from "./models/Message.js";
+import { messages } from "./data/index.js";
 
 
 
@@ -108,6 +110,7 @@ mongoose
 
       // User.insertMany(users);
       // Post.insertMany(posts);
+      // Message.insertMany(messages);
     });
   })
   .catch((error) => {

@@ -438,3 +438,39 @@ export const posts = [
     ],
   },
 ];
+
+export const messages = [
+  {
+    _id: new mongoose.Types.ObjectId(),
+    senderId: userIds[0],
+    receiverId: '6564243268eb48de7f229b8a',
+    content: "Hey, how are you doing?",
+    timestamp: new Date(),
+    isRead: false
+  },
+  {
+    _id: new mongoose.Types.ObjectId(),
+    senderId: userIds[1],
+    receiverId: '6564243268eb48de7f229b8a',
+    content: "I'm good, thanks! What about you?",
+    timestamp: new Date(),
+    isRead: false
+  },
+  {
+    _id: new mongoose.Types.ObjectId(),
+    senderId: userIds[2],
+    receiverId: '6564243268eb48de7f229b8a',
+    content: "Did you see the game last night?",
+    timestamp: new Date(),
+    isRead: false
+  },
+  {
+    _id: new mongoose.Types.ObjectId(),
+    senderId: userIds[3],
+    receiverId: '6564243268eb48de7f229b8a',
+    content: "Yes, it was amazing!",
+    timestamp: new Date(),
+    isRead: true
+  },
+  // ... more messages
+];
