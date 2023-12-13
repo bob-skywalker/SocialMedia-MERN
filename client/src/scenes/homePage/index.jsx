@@ -1,5 +1,5 @@
 import { Box, useMediaQuery } from "@mui/material";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Navbar from "scenes/navbar";
@@ -10,17 +10,28 @@ import PostsWidget from "scenes/widgets/PostsWidget";
 import PostWidget from "scenes/widgets/PostWidget";
 import AdvertWidget from "scenes/widgets/AdvertWidget";
 import FriendListWidget from "scenes/widgets/FriendListWidget";
+import ChatWindow from "scenes/widgets/ChatWidget";
 
 const HomePage = () => {
   const isNonMobileScreen = useMediaQuery("(min-width: 1000px)");
   const { _id, picturePath } = useSelector((state) => state.user);
   const posts = useSelector((state) => state.posts);
   const token = useSelector((state) => state.token);
+  
+  // const [isChatOpen, setChatOpen] = useState(false);
+  
+  // const handleOpenChat = () => {
+  //   setChatOpen(true);
+  // }
+
+  // const handleCloseChat = () => {
+  //   setChatOpen(false);
+  // }
 
 
   return (
     <>
-      <Navbar />
+      <Navbar/>
       <Box
         style={{paddingTop: '90px'}}
         width="100%"

@@ -29,6 +29,7 @@ import { setMode, setLogout } from "state";
 import { useNavigate } from "react-router-dom";
 import FlexBetween from "components/FlexBetween";
 import UserImage from "components/UserImage";
+import ChatWindow from "scenes/widgets/ChatWidget";
 
 const Navbar = () => {
   const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
@@ -53,6 +54,20 @@ const Navbar = () => {
   const isMessagePopoverOpen = Boolean(messageAnchorEl);
 
   const [messages, setMessages] = useState([]);
+
+  //Chat Window Logic 
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const [activeMessage, setActiveMessage] = useState(null);
+  const handleOpenChat = (messageId) => {
+    const selectedMessage = messages.find(message => message._id === messageId);
+    setActiveMessage(selectedMessage);
+    setIsChatOpen(true);
+    handleMessagePopoverClose();
+  }
+
+  const handleCloseChat = () => {
+    setIsChatOpen(false);
+  }
 
   const handleMessagePopoverOpen = (event) => {
     setMessageAnchorEl(event.currentTarget);
@@ -152,6 +167,9 @@ const Navbar = () => {
                               cursor:'pointer'
                             }}}
                          marginTop='0.7rem'
+                         onClick={() => {
+                          handleOpenChat(message._id);
+                         }}
                     >
                       <UserImage image={message.picturePath} size="35px"/>
                       <Box
@@ -159,6 +177,7 @@ const Navbar = () => {
                       >
                         <Typography
                           variant="h5"
+                          fontWeight="600"
                         >{message.senderName}</Typography>
                         <Typography
                           variant="body1"
@@ -286,6 +305,28 @@ const Navbar = () => {
           </Box>
         )}
       </FlexBetween>
+      <ChatWindow open={isChatOpen} 
+                  onClose={handleCloseChat} 
+                  sx={{
+                    '& .MuiDrawer-paper': { // This targets the internal Paper component of the Drawer
+                      width: '350px', 
+                      boxSizing: 'border-box'
+                      // Add any other styles here
+                    },
+                  }}
+      >
+        {activeMessage ? 
+        (<div>
+          <Box display='flex' alignItems='center' gap={2} pl={2}>
+            <UserImage image={activeMessage.picturePath} size="35px"/>
+            <Box ml={0.5}>
+            <Typography variant="h6">{activeMessage.senderName}</Typography>
+            <Typography variant="body1">{activeMessage.content}</Typography>
+            </Box>
+          </Box>
+        </div>) : <div>Select a message to start chatting.</div>
+      } 
+      </ChatWindow>
     </div>
   );
 };
