@@ -5,6 +5,7 @@ const initialState = {
     user: null,
     token: null,
     posts: [],
+    messages: []
 };
 
 export const authSlice = createSlice({
@@ -41,6 +42,9 @@ export const authSlice = createSlice({
                 return post; 
             });
             state.posts = updatedPosts;
+        },
+        setMessages: (state, action) => {
+            state.messages = action.payload.messages;
         }
     }
 });

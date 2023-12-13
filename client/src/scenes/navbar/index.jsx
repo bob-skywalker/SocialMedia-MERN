@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Box,
   IconButton,
@@ -28,15 +28,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { setMode, setLogout } from "state";
 import { useNavigate } from "react-router-dom";
 import FlexBetween from "components/FlexBetween";
+import UserImage from "components/UserImage";
 
 const Navbar = () => {
   const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
+  const token = useSelector((state) => state.token);
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
 
   const theme = useTheme();
+  const { palette } = useTheme();
+  const main = palette.primary.main;
   const neutralLight = theme.palette.neutral.light;
   const dark = theme.palette.neutral.dark;
   const background = theme.palette.background.default;
@@ -48,6 +52,8 @@ const Navbar = () => {
   const [messageAnchorEl, setMessageAnchorEl] = useState(null);
   const isMessagePopoverOpen = Boolean(messageAnchorEl);
 
+  const [messages, setMessages] = useState([]);
+
   const handleMessagePopoverOpen = (event) => {
     setMessageAnchorEl(event.currentTarget);
   };
@@ -55,6 +61,24 @@ const Navbar = () => {
   const handleMessagePopoverClose = () => {
     setMessageAnchorEl(null);
   };
+
+  const getMessages = async () => {
+    try {
+      const response = await fetch(`http://localhost:3001/messages/user/${user._id}`, {
+      method: 'GET',
+      headers: { Authorization: `Bearer ${token}`}
+    })
+      const data = await response.json();
+      setMessages(data);
+    } catch (err) {
+      console.log('Error fetching messages for User.')
+    }
+  } 
+
+  useEffect(() => {
+    getMessages();
+  },[user._id, token]);
+  
 
   return (
     <div style={{ position: "fixed", top: 0, width: "100%", zIndex: 1000 }}>
@@ -115,11 +139,30 @@ const Navbar = () => {
                 horizontal: "right",
               }}
             >
-              <Box p={2} sx={{width: '300px'}}>
-                <Typography sx={{ p: 1 }}>Message 1</Typography>
-                <Divider />
-                <Typography sx={{ p: 1 }}>Message 2</Typography>
-                {/* More content here */}
+              <Box p={2} sx={{width: '300px'}} textAlign='left'>
+                {messages.map(message => (
+                  <Box gap="1rem" key={message._id} sx={{ display: 'flex', alignItems:'center', marginBottom: '0.5rem'}}>
+                    <UserImage image={message.picturePath} size="35px"/>
+                    <Box
+                    sx={{ overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}
+                      onClick={() => {}}
+                    >
+                      <Typography
+                        variant="body1"
+                        fontWeight="500"
+                        noWrap
+                        sx={{
+                          "&:hover": {
+                            color: palette.primary.dark,
+                            cursor:'pointer'
+                          }
+                        }}
+                      >
+                        {message.content}
+                      </Typography>
+                    </Box>
+                  </Box>
+                ))}
               </Box>
             </Popover>
 

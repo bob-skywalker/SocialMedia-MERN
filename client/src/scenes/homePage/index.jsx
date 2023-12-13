@@ -15,8 +15,8 @@ const HomePage = () => {
   const isNonMobileScreen = useMediaQuery("(min-width: 1000px)");
   const { _id, picturePath } = useSelector((state) => state.user);
   const posts = useSelector((state) => state.posts);
+  const token = useSelector((state) => state.token);
 
-  
 
   return (
     <>

@@ -443,7 +443,8 @@ export const messages = [
   {
     _id: new mongoose.Types.ObjectId(),
     senderId: userIds[0],
-    receiverId: '6564243268eb48de7f229b8a',
+    picturePath: "https://res.cloudinary.com/dkuamfhwm/image/upload/v1700690601/bobokingdom/rye7wgajroyukvvfqxgd.jpg",
+    receiverId: '65792c4cf7afeadd70541379',
     content: "Hey, how are you doing?",
     timestamp: new Date(),
     isRead: false
@@ -451,7 +452,8 @@ export const messages = [
   {
     _id: new mongoose.Types.ObjectId(),
     senderId: userIds[1],
-    receiverId: '6564243268eb48de7f229b8a',
+    picturePath: "https://res.cloudinary.com/dkuamfhwm/image/upload/v1700690598/bobokingdom/t0qgoimpbdbw0umg1wl9.jpg",
+    receiverId: '65792c4cf7afeadd70541379',
     content: "I'm good, thanks! What about you?",
     timestamp: new Date(),
     isRead: false
@@ -459,7 +461,8 @@ export const messages = [
   {
     _id: new mongoose.Types.ObjectId(),
     senderId: userIds[2],
-    receiverId: '6564243268eb48de7f229b8a',
+    picturePath: "https://res.cloudinary.com/dkuamfhwm/image/upload/v1700690598/bobokingdom/ibwkjdgp9mrwgzp1b8ux.jpg",
+    receiverId: '65792c4cf7afeadd70541379',
     content: "Did you see the game last night?",
     timestamp: new Date(),
     isRead: false
@@ -467,7 +470,8 @@ export const messages = [
   {
     _id: new mongoose.Types.ObjectId(),
     senderId: userIds[3],
-    receiverId: '6564243268eb48de7f229b8a',
+    picturePath: "https://res.cloudinary.com/dkuamfhwm/image/upload/v1700690599/bobokingdom/xisabvyydnrfvuiap4jd.jpg",
+    receiverId: '65792c4cf7afeadd70541379',
     content: "Yes, it was amazing!",
     timestamp: new Date(),
     isRead: true

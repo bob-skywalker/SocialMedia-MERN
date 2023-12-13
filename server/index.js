@@ -11,13 +11,16 @@ import { fileURLToPath } from "url";
 import { register } from "./controllers/auth.js";
 import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/users.js";
+import messageRoutes from "./routes/message.js";
 import { verifyToken } from "./middleware/auth.js";
 import { createPost } from "./controllers/posts.js";
 import postRoutes from "./routes/posts.js";
 import { v2 as cloudinary } from 'cloudinary';
 import { CloudinaryStorage } from 'multer-storage-cloudinary';
+import User from "./models/User.js";
+import Post from "./models/Post.js";
 import Message from "./models/Message.js";
-import { messages } from "./data/index.js";
+import { messages, posts, users } from "./data/index.js";
 
 
 
@@ -96,6 +99,7 @@ app.post("/posts", verifyToken, upload.fields([
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/posts", postRoutes);
+app.use("/messages", messageRoutes);
 
 /* MONGOOSE SETUP */
 const PORT = process.env.PORT || 6001;
