@@ -139,29 +139,38 @@ const Navbar = () => {
                 horizontal: "right",
               }}
             >
-              <Box p={2} sx={{width: '300px'}} textAlign='left'>
+              <Box p={2} sx={{width: '350px'}} textAlign='left'>
+
                 {messages.map(message => (
-                  <Box gap="1rem" key={message._id} sx={{ display: 'flex', alignItems:'center', marginBottom: '0.5rem'}}>
-                    <UserImage image={message.picturePath} size="35px"/>
-                    <Box
-                    sx={{ overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}
-                      onClick={() => {}}
+                  <Box>
+                    <Box gap="1rem" 
+                         key={message._id} 
+                         sx={{ display: 'flex', 
+                         alignItems:'center', 
+                         marginBottom: '0.7rem', "&:hover": {
+                              color: palette.primary.dark,
+                              cursor:'pointer'
+                            }}}
+                         marginTop='0.7rem'
                     >
-                      <Typography
-                        variant="body1"
-                        fontWeight="500"
-                        noWrap
-                        sx={{
-                          "&:hover": {
-                            color: palette.primary.dark,
-                            cursor:'pointer'
-                          }
-                        }}
+                      <UserImage image={message.picturePath} size="35px"/>
+                      <Box
+                      sx={{ overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}
                       >
-                        {message.content}
-                      </Typography>
+                        <Typography
+                          variant="h5"
+                        >{message.senderName}</Typography>
+                        <Typography
+                          variant="body1"
+                          fontWeight="500"
+                          noWrap
+                        >
+                          {message.content}
+                        </Typography>
+                      </Box>
                     </Box>
-                  </Box>
+                    <Divider /> 
+                  </ Box>
                 ))}
               </Box>
             </Popover>

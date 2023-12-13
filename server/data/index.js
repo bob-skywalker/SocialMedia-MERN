@@ -438,11 +438,11 @@ export const posts = [
     ],
   },
 ];
-
 export const messages = [
   {
     _id: new mongoose.Types.ObjectId(),
     senderId: userIds[0],
+    senderName: 'James Bond',
     picturePath: "https://res.cloudinary.com/dkuamfhwm/image/upload/v1700690601/bobokingdom/rye7wgajroyukvvfqxgd.jpg",
     receiverId: '65792c4cf7afeadd70541379',
     content: "Hey, how are you doing?",
@@ -452,6 +452,7 @@ export const messages = [
   {
     _id: new mongoose.Types.ObjectId(),
     senderId: userIds[1],
+    senderName: 'Steve Ralph',
     picturePath: "https://res.cloudinary.com/dkuamfhwm/image/upload/v1700690598/bobokingdom/t0qgoimpbdbw0umg1wl9.jpg",
     receiverId: '65792c4cf7afeadd70541379',
     content: "I'm good, thanks! What about you?",
@@ -461,6 +462,7 @@ export const messages = [
   {
     _id: new mongoose.Types.ObjectId(),
     senderId: userIds[2],
+    senderName: 'Rob Samadrala',
     picturePath: "https://res.cloudinary.com/dkuamfhwm/image/upload/v1700690598/bobokingdom/ibwkjdgp9mrwgzp1b8ux.jpg",
     receiverId: '65792c4cf7afeadd70541379',
     content: "Did you see the game last night?",
@@ -470,6 +472,7 @@ export const messages = [
   {
     _id: new mongoose.Types.ObjectId(),
     senderId: userIds[3],
+    senderName: 'Bindu Alexander',
     picturePath: "https://res.cloudinary.com/dkuamfhwm/image/upload/v1700690599/bobokingdom/xisabvyydnrfvuiap4jd.jpg",
     receiverId: '65792c4cf7afeadd70541379',
     content: "Yes, it was amazing!",
