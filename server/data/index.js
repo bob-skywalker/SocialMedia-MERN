@@ -442,42 +442,30 @@ export const messages = [
   {
     _id: new mongoose.Types.ObjectId(),
     senderId: userIds[0],
-    senderName: 'James Bond',
-    picturePath: "https://res.cloudinary.com/dkuamfhwm/image/upload/v1700690601/bobokingdom/rye7wgajroyukvvfqxgd.jpg",
     receiverId: '65792c4cf7afeadd70541379',
-    content: "Hey, how are you doing?",
-    timestamp: new Date(),
-    isRead: false
-  },
-  {
-    _id: new mongoose.Types.ObjectId(),
-    senderId: userIds[1],
-    senderName: 'Steve Ralph',
-    picturePath: "https://res.cloudinary.com/dkuamfhwm/image/upload/v1700690598/bobokingdom/t0qgoimpbdbw0umg1wl9.jpg",
-    receiverId: '65792c4cf7afeadd70541379',
-    content: "I'm good, thanks! What about you?",
-    timestamp: new Date(),
-    isRead: false
-  },
-  {
-    _id: new mongoose.Types.ObjectId(),
-    senderId: userIds[2],
-    senderName: 'Rob Samadrala',
-    picturePath: "https://res.cloudinary.com/dkuamfhwm/image/upload/v1700690598/bobokingdom/ibwkjdgp9mrwgzp1b8ux.jpg",
-    receiverId: '65792c4cf7afeadd70541379',
-    content: "Did you see the game last night?",
-    timestamp: new Date(),
-    isRead: false
-  },
-  {
-    _id: new mongoose.Types.ObjectId(),
-    senderId: userIds[3],
-    senderName: 'Bindu Alexander',
-    picturePath: "https://res.cloudinary.com/dkuamfhwm/image/upload/v1700690599/bobokingdom/xisabvyydnrfvuiap4jd.jpg",
-    receiverId: '65792c4cf7afeadd70541379',
-    content: "Yes, it was amazing!",
-    timestamp: new Date(),
-    isRead: true
-  },
-  // ... more messages
+    content: [{
+      _id: new mongoose.Types.ObjectId(),
+      senderId: userIds[0],
+      senderName: 'Test Me',
+      picturePath: "https://res.cloudinary.com/dkuamfhwm/image/upload/v1700690601/bobokingdom/rye7wgajroyukvvfqxgd.jpg",
+      receiverId: '65792c4cf7afeadd70541379',
+      text: "Hello bro. How's life right now",
+      isRead: Math.random() > 0.5,
+      createdAt: Date.now(),
+      updatedAt: Date.now()
+    },
+    {
+      _id: new mongoose.Types.ObjectId(),
+      senderId: '65792c4cf7afeadd70541379',
+      senderName: 'Long Chen',
+      picturePath: "https://res.cloudinary.com/dkuamfhwm/image/upload/v1700695550/bobokingdom/hkoywgi8h1gp29thttcu.jpg",
+      receiverId: userIds[0],
+      text: "I am doing rather good, thanks for asking",
+      isRead: Math.random() > 0.5,
+      createdAt: Date.now(),
+      updatedAt: Date.now()
+    }
+  
+  ]
+  }
 ];
