@@ -178,13 +178,13 @@ const Navbar = () => {
                         <Typography
                           variant="h5"
                           fontWeight="600"
-                        >{message.senderName}</Typography>
+                        >{message.messageSenderName}</Typography>
                         <Typography
                           variant="body1"
                           fontWeight="500"
                           noWrap
                         >
-                          {message.content}
+                          {message.content[message.content.length - 1].text}
                         </Typography>
                       </Box>
                     </Box>

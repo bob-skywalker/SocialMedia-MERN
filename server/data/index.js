@@ -443,6 +443,8 @@ export const messages = [
     _id: new mongoose.Types.ObjectId(),
     senderId: userIds[0],
     receiverId: '65792c4cf7afeadd70541379',
+    picturePath: "https://res.cloudinary.com/dkuamfhwm/image/upload/v1700690601/bobokingdom/rye7wgajroyukvvfqxgd.jpg",
+    messageSenderName: 'Test Me',
     content: [{
       _id: new mongoose.Types.ObjectId(),
       senderId: userIds[0],

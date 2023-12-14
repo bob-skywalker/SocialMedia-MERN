@@ -11,6 +11,14 @@ const messageSchema = new mongoose.Schema({
         ref: 'User',
         required: true
     },
+    picturePath: {
+        type: String,
+        required: true 
+    },
+    messageSenderName: {
+        type: String,
+        required: true
+    },
     content: [{
         _id: {
             type: mongoose.Schema.Types.ObjectId,
