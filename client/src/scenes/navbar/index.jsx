@@ -309,22 +309,39 @@ const Navbar = () => {
                   onClose={handleCloseChat} 
                   sx={{
                     '& .MuiDrawer-paper': { // This targets the internal Paper component of the Drawer
-                      width: '350px', 
+                      width: '100%', 
                       boxSizing: 'border-box'
                       // Add any other styles here
                     },
                   }}
       >
-        {activeMessage ? 
-        (<div>
-          <Box display='flex' alignItems='center' gap={2} pl={2}>
-            <UserImage image={activeMessage.picturePath} size="35px"/>
-            <Box ml={0.5}>
-            <Typography variant="h6">{activeMessage.senderName}</Typography>
-            <Typography variant="body1">{activeMessage.content}</Typography>
+        {activeMessage ? (activeMessage.content.map(message => (
+          <div>
+            <Box 
+              display='flex' 
+              alignItems='center' 
+              gap={2} 
+              pl={2} 
+              pb={3}
+              pr={2}
+              pt={2}
+              flexDirection={message.senderId === user._id ? 'row-reverse' : 'row'}
+              >
+              <UserImage image={message.picturePath} size="35px"/>
+              <Box
+                   display='flex'
+                   flexDirection='column'
+                   alignItems={message.senderId === user._id ? 'flex-end' : 'flex-start'}
+              >
+              <Typography variant="h6">{message.senderName}</Typography>
+              <Typography variant="body1">{message.text}</Typography>
+              </Box>
             </Box>
-          </Box>
-        </div>) : <div>Select a message to start chatting.</div>
+            <Divider />
+          </div>
+        )
+        ))
+     : <div>Select a message to start chatting.</div>
       } 
       </ChatWindow>
     </div>
