@@ -317,7 +317,8 @@ const Navbar = () => {
       >
         {activeMessage ? (activeMessage.content.map(message => (
           <div>
-            <Box 
+            <Box
+              key={message._id}
               display='flex' 
               alignItems='center' 
               gap={2} 
