@@ -23,6 +23,7 @@ const ChatWindow = ({ open, onClose, children, sx }) => {
   const [inputText, setInputText] = useState("");
 
   const handleSendMessage = () => {
+    //BACKEND API SEND MESSAGE
     console.log(inputText);
     setInputText("");
   }
