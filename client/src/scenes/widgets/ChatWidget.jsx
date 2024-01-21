@@ -24,7 +24,6 @@ const ChatWindow = ({ open, onClose, children, sx }) => {
 
   const handleSendMessage = () => {
     //BACKEND API SEND MESSAGE
-    console.log(inputText);
     setInputText("");
   }
 
@@ -36,39 +35,6 @@ const ChatWindow = ({ open, onClose, children, sx }) => {
       <Box sx={{ overflow: "auto", height: "calc(100% - 64px)" }}>
         {children}
       </Box>
-      {/* <Box
-        sx={{
-          position: "fixed",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          padding: "10px",
-          borderTop: neutralLight,
-          backgroundColor: neutralLight,
-          width: "auto",
-        }}
-      > */}
-        {/* <InputBase
-          fullWidth
-          value={inputText}
-          onChange={(e) => setInputText(e.target.value)}
-          placeholder="Type a message..."
-          onKeyPress={(e) => {
-            if (e.key === "Enter") {
-              handleSendMessage();
-            }
-          }}
-          endAdornment={
-            <IconButton onClick={handleSendMessage}>
-              <SendIcon
-                sx={{
-                  backgroundColor: neutralLight,
-                }}
-              />
-            </IconButton>
-          }
-        ></InputBase> */}
-      {/* </Box> */}
       <Box
         sx={{
           position: 'fixed',
