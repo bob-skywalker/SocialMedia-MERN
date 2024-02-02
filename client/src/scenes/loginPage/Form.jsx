@@ -115,7 +115,20 @@ const Form = () => {
     const {setErrors} = onSubmitProps;
     if (isLogin) await login(values, {setErrors});
     if (isRegister) await register(values, onSubmitProps);
-  };
+  }
+
+  const handleDemoLogin = async (setValues, e) => {
+    e.preventDefault();
+
+    const demoCredentials = {
+      email: 'longchen@gmail.com',
+      password: 'zb2225612'
+    }
+
+    setValues(demoCredentials)
+
+    await login(demoCredentials, {setErrors: () => {}});
+  }
 
   return (
       <Formik
@@ -131,7 +144,8 @@ const Form = () => {
           handleChange,
           handleSubmit,
           setFieldValue,
-          resetForm
+          resetForm,
+          setValues
         }) => {
           return (
             <form onSubmit={handleSubmit}>
@@ -265,13 +279,33 @@ const Form = () => {
                     >
                         {isLogin ? "LOGIN":"REGISTER"}
                     </Button>
+                    {isLogin && (
+                      <Button
+                        fullWidth
+                        type="submit"
+                        sx={{
+                          m:"2rem, 0",
+                          p:"1rem",
+                          backgroundColor: "orange",
+                          color: palette.background.alt,
+                          "&:hover": { color: palette.primary.main}
+                        }}
+                        onClick={(e) => handleDemoLogin(setValues, e)}
+                      >
+                        Demo Login
+                      </Button>
+                    )}
+                    
                     <Typography
                         onClick={() => {
                             setPageType(isLogin ? "register":"login");
                             resetForm();
                         }}
                         sx={{
+                            m: "1rem",
                             textDecoration: "underline",
+                            fontWeight: 800,
+                            fontSize: 18,
                             color: palette.primary.main,
                             "&:hover": {
                                 cursor: "pointer",
